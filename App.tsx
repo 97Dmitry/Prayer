@@ -1,18 +1,19 @@
-import React from "react";
+import React, { FC } from "react";
+import { Provider } from "react-redux";
 import styled from "styled-components/native";
-import { View } from "react-native";
 
-const App: React.FC = () => {
+import store from "./src/store";
+
+const App: FC = () => {
   return (
-    <View>
-      <TitleText>Hello World</TitleText>
-    </View>
+    <Provider store={store}>
+      <Wrapper />
+    </Provider>
   );
 };
 
 export default App;
 
-const TitleText = styled.Text`
-  font-size: 20px;
-  font-weight: 700;
+const Wrapper = styled.View`
+  flex: 1;
 `;
