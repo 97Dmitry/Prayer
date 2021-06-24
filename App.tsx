@@ -4,10 +4,14 @@ import styled from "styled-components/native";
 
 import store from "./src/store";
 
+import { Desk } from "./src/views/containers/Desk";
+
 const App: FC = () => {
   return (
     <Provider store={store}>
-      <Wrapper />
+      <Wrapper>
+        <Desk />
+      </Wrapper>
     </Provider>
   );
 };
