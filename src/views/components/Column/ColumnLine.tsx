@@ -3,19 +3,23 @@ import styled from "styled-components/native";
 
 interface iColumn {
   title: string;
+  navigation: any;
 }
 
-const Column: FC<iColumn> = ({ title }) => {
+const ColumnLine: FC<iColumn> = ({ title, navigation }) => {
   return (
-    <Wrapper>
+    <Wrapper
+      onPress={() => {
+        navigation.navigate("Column");
+      }}>
       <Title>{title}</Title>
     </Wrapper>
   );
 };
 
-export default Column;
+export default ColumnLine;
 
-const Wrapper = styled.View`
+const Wrapper = styled.Pressable`
   border: 1px solid black;
   border-radius: 10px;
   margin-bottom: 10px;

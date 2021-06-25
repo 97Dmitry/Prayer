@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import columnSlice from "./column/columnSlice";
+import authSlice from "./user/userSlice";
 
 const middleware = getDefaultMiddleware({
   serializableCheck: true,
@@ -16,6 +17,7 @@ const middleware = getDefaultMiddleware({
 const store = configureStore({
   reducer: {
     columnState: columnSlice,
+    userState: authSlice,
   },
   middleware,
 });

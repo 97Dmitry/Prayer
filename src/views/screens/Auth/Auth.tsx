@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Button } from "react-native";
 
-import { Header } from "../../components/UI/Header";
+import { Header } from "../../components/Header";
 import { Input } from "../../components/UI/Input";
 
-const Registration = () => {
+const Auth = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   return (
     <>
       <Wrapper>
-        <Header title={"Registration"} />
+        <Header title={"Authorization"} />
       </Wrapper>
       <Content>
         <Text>Login</Text>
@@ -39,7 +39,7 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Auth;
 
 const Wrapper = styled.View``;
 const Content = styled.ScrollView`

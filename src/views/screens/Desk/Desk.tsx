@@ -1,13 +1,17 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
 
-import { Column } from "../../components/Column";
+import { ColumnLine } from "../../components/Column";
 import { View } from "react-native";
 import { Icon } from "react-native-elements";
 
-import { Header } from "../../components/UI/Header";
+import { Header } from "../../components/Header";
 
-const Desk: FC = () => {
+interface iDesk {
+  navigation: any;
+}
+
+const Desk: FC<iDesk> = ({ navigation }) => {
   const columns = ["To Do", "In Progress", "Completed"];
 
   return (
@@ -18,12 +22,12 @@ const Desk: FC = () => {
           <Icon color={"#72a8bc"} name={"add"} type={"material"} size={40} />
         }
         onPressFunc={() => {
-          console.log("111111111111111111111");
+          console.log("Tab");
         }}
       />
       <Columns>
         {columns.map((value, index) => (
-          <Column key={index} title={value} />
+          <ColumnLine key={index} title={value} navigation={navigation} />
         ))}
       </Columns>
     </View>

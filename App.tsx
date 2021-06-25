@@ -1,28 +1,19 @@
+import "react-native-gesture-handler";
 import React, { FC } from "react";
 import { Provider } from "react-redux";
-import styled from "styled-components/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import store from "./src/store";
-
-// import { Desk } from "./src/views/containers/Desk";
-// import { Auth } from "./src/views/containers/Auth";
-import { Registration } from "./src/views/containers/Registration";
+import Navigation from "./Navigation";
 
 const App: FC = () => {
   return (
-    <Provider store={store}>
-      <SafeAreaProvider>
-        <Wrapper>
-          <Registration />
-        </Wrapper>
-      </SafeAreaProvider>
-    </Provider>
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    </SafeAreaProvider>
   );
 };
 
 export default App;
-
-const Wrapper = styled.View`
-  flex: 1;
-`;

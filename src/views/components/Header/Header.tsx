@@ -30,7 +30,6 @@ const Title = styled.View`
   border-bottom-width: 1px;
 `;
 const Wrapper = styled.View`
-  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -41,7 +40,7 @@ const TitleText = styled.Text`
   color: black;
 `;
 
-const Button = styled.Text`
+const Button = styled.TouchableOpacity`
   position: absolute;
   right: 10px;
 `;
