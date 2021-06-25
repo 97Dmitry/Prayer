@@ -3,21 +3,24 @@ import styled from "styled-components/native";
 
 import { Column } from "../../components/Column";
 import { View } from "react-native";
+import { Icon } from "react-native-elements";
+
+import { Header } from "../../components/UI/Header";
 
 const Desk: FC = () => {
   const columns = ["To Do", "In Progress", "Completed"];
 
   return (
     <View>
-      <Title>
-        <TitleText>My Desk</TitleText>
-        <AddButton
-          onPress={() => {
-            console.log("e");
-          }}>
-          +
-        </AddButton>
-      </Title>
+      <Header
+        title={"My Desk"}
+        icon={
+          <Icon color={"#72a8bc"} name={"add"} type={"material"} size={40} />
+        }
+        onPressFunc={() => {
+          console.log("111111111111111111111");
+        }}
+      />
       <Columns>
         {columns.map((value, index) => (
           <Column key={index} title={value} />
@@ -28,29 +31,6 @@ const Desk: FC = () => {
 };
 
 export default Desk;
-
-const Title = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  height: 64px;
-
-  border-bottom-color: #e5e5e5;
-  border-bottom-width: 1px;
-`;
-const TitleText = styled.Text`
-  font-size: 25px;
-  color: black;
-`;
-
-const AddButton = styled.Text`
-  font-size: 40px;
-  position: absolute;
-  right: 15px;
-  color: #72a8bc;
-`;
 
 const Columns = styled.View`
   padding: 15px;
