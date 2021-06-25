@@ -6,14 +6,15 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import store from "./src/store";
 
 // import { Desk } from "./src/views/containers/Desk";
-import { Auth } from "./src/views/containers/Auth";
+// import { Auth } from "./src/views/containers/Auth";
+import { Registration } from "./src/views/containers/Registration";
 
 const App: FC = () => {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
         <Wrapper>
-          <Auth />
+          <Registration />
         </Wrapper>
       </SafeAreaProvider>
     </Provider>

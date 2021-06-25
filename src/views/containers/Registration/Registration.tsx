@@ -5,13 +5,13 @@ import { Button } from "react-native";
 import { Header } from "../../components/UI/Header";
 import { Input } from "../../components/UI/Input";
 
-const Auth = () => {
+const Registration = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   return (
     <>
       <Wrapper>
-        <Header title={"Authorization"} />
+        <Header title={"Registration"} />
       </Wrapper>
       <Content>
         <Text>Login</Text>
@@ -39,7 +39,7 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Registration;
 
 const Wrapper = styled.View``;
 const Content = styled.ScrollView`
