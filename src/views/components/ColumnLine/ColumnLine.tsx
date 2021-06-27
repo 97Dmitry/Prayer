@@ -3,14 +3,14 @@ import styled from "styled-components/native";
 
 interface iColumn {
   title: string;
-  navigation: any;
+  navigation?: any;
 }
 
 const ColumnLine: FC<iColumn> = ({ title, navigation }) => {
   return (
     <Wrapper
       onPress={() => {
-        navigation.navigate("Column");
+        navigation.navigate("Column", { title });
       }}>
       <Title>{title}</Title>
     </Wrapper>

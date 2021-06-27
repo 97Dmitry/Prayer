@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Button } from "react-native";
 
-import { Header } from "../../components/Header";
 import { Input } from "../../components/UI/Input";
 
 const Auth = () => {
@@ -10,9 +9,6 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   return (
     <>
-      <Wrapper>
-        <Header title={"Authorization"} />
-      </Wrapper>
       <Content>
         <Text>Login</Text>
         <Input

@@ -9,6 +9,7 @@ import { Auth } from "./src/views/screens/Auth";
 import { Registration } from "./src/views/screens/Registration";
 import { Desk } from "./src/views/screens/Desk";
 import { Column } from "./src/views/screens/Column";
+import { Nav } from "./src/views/components/Nav";
 
 const Stack = createStackNavigator();
 
@@ -17,16 +18,43 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerTitle: props => <Nav {...props} />,
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+            borderBottomColor: "#e5e5e5",
+            borderBottomWidth: 1,
+          },
+          headerTintColor: "#000",
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: "200",
+          },
+        }}>
         {user.isAuth ? (
           <>
             <Stack.Screen name="Home" component={Desk} />
-            <Stack.Screen name="Column" component={Column} />
+            <Stack.Screen
+              name="Column"
+              component={Column}
+              // @ts-ignore
+              options={({ route }) => ({ title: route.params?.title })}
+            />
           </>
         ) : (
           <>
-            <Stack.Screen name="Auth" component={Auth} />
-            <Stack.Screen name="Registration" component={Registration} />
+            <Stack.Screen
+              name="Auth"
+              component={Auth}
+              options={{ headerTitle: "Authorization" }}
+            />
+            <Stack.Screen
+              name="Registration"
+              component={Registration}
+              options={{ headerTitle: "Registration" }}
+            />
           </>
         )}
       </Stack.Navigator>
