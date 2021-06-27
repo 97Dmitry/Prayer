@@ -3,8 +3,9 @@ import { Icon } from "react-native-elements";
 import { SceneMap, TabView } from "react-native-tab-view";
 
 import NavButton from "../../components/UI/NavButton/NavButton";
-import { Registration } from "../Registration";
-import { Auth } from "../Auth";
+
+import { Subs } from "../Subs";
+import { Prayers } from "../Prayers";
 import { renderTabBar } from "../../components/UI/RendeTabBar";
 
 interface iColumn {
@@ -37,7 +38,7 @@ const Column: FC<iColumn> = ({ route, navigation }) => {
     { key: "myPrayers", title: "My prayers" },
     { key: "subscribed", title: "Subscribed" },
   ]);
-  const renderScene = SceneMap({ myPrayers: Auth, subscribed: Registration });
+  const renderScene = SceneMap({ myPrayers: Prayers, subscribed: Subs });
   return (
     <TabView
       navigationState={{ index, routes }}
