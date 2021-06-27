@@ -2,7 +2,6 @@ import React, { FC, useLayoutEffect } from "react";
 import styled from "styled-components/native";
 
 import { ColumnLine } from "../../components/ColumnLine";
-import { View } from "react-native";
 import { Icon } from "react-native-elements";
 
 import NavButton from "../../components/UI/NavButton/NavButton";
@@ -29,17 +28,22 @@ const Desk: FC<iDesk> = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <View>
+    <Wrapper>
       <Columns>
         {columns.map((value, index) => (
           <ColumnLine key={index} title={value} navigation={navigation} />
         ))}
       </Columns>
-    </View>
+    </Wrapper>
   );
 };
 
 export default Desk;
+
+const Wrapper = styled.View`
+  flex: 1;
+  background-color: #ffffff;
+`;
 
 const Columns = styled.View`
   padding: 15px;
