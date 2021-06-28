@@ -28,7 +28,7 @@ const Registration = () => {
         />
         <ButtonUp>
           <Button
-            title={"Sing In"}
+            title={"Sing Up"}
             onPress={() => {
               console.log("Login: ", login, "Password: ", password);
             }}

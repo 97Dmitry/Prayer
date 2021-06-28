@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { iUser } from "./iUser";
+import { IUser } from "./iUser";
 
-const initialState: iUser = {
+const initialState: IUser = {
   username: "",
   isAuth: true,
 };

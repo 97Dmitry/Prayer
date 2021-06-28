@@ -1,4 +1,4 @@
-export interface iUser {
+export interface IUser {
   username: string;
   isAuth: boolean;
 }
