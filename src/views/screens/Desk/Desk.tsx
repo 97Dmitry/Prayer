@@ -6,11 +6,11 @@ import { Icon } from "react-native-elements";
 
 import NavButton from "../../components/UI/NavButton/NavButton";
 
-interface iDesk {
+interface IDesk {
   navigation: any;
 }
 
-const Desk: FC<iDesk> = ({ navigation }) => {
+const Desk: FC<IDesk> = ({ navigation }) => {
   const columns = ["To Do", "In Progress", "Completed"];
 
   useLayoutEffect(() => {

@@ -8,7 +8,7 @@ const Auth = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <>
+    <Wrapper>
       <Content>
         <Text>Login</Text>
         <Input
@@ -31,7 +31,7 @@ const Auth = () => {
           />
         </ButtonUp>
       </Content>
-    </>
+    </Wrapper>
   );
 };
 

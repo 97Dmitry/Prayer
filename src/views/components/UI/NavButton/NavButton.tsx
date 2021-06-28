@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
 
-interface iNavButton {
+interface INavButton {
   onPressFunc?: any;
   icon?: JSX.Element;
 }
 
-const NavButton: FC<iNavButton> = ({ onPressFunc, icon }) => {
+const NavButton: FC<INavButton> = ({ onPressFunc, icon }) => {
   return <Button onPress={onPressFunc}>{icon}</Button>;
 };
 

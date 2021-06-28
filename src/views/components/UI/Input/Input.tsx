@@ -1,14 +1,14 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components/native";
 
-interface iInput {
+interface IInput {
   children?: JSX.Element;
   placeholderText: string;
   text: string;
   setText: any;
 }
 
-const Input: FC<iInput> = ({ children, placeholderText, text, setText }) => {
+const Input: FC<IInput> = ({ children, placeholderText, text, setText }) => {
   const [focus, setFocus] = useState(false);
   return (
     <Wrapper border={focus}>
@@ -30,7 +30,10 @@ const Input: FC<iInput> = ({ children, placeholderText, text, setText }) => {
 
 export default Input;
 
-const Wrapper = styled.View`
+interface IWrapper {
+  border: boolean;
+}
+const Wrapper = styled.View<IWrapper>`
   display: flex;
   flex-direction: row;
   align-items: center;

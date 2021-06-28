@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
 
-interface iColumn {
+interface IColumn {
   title: string;
   navigation?: any;
 }
 
-const ColumnLine: FC<iColumn> = ({ title, navigation }) => {
+const ColumnLine: FC<IColumn> = ({ title, navigation }) => {
   return (
     <Wrapper
       onPress={() => {

@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
 
-interface iHeader {
+interface IHeader {
   onPressFunc?: any;
   title: string;
   icon?: JSX.Element;
   children?: JSX.Element;
 }
 
-const Header: FC<iHeader> = ({ onPressFunc, title, icon, children }) => {
+const Header: FC<IHeader> = ({ onPressFunc, title, icon, children }) => {
   return (
     <>
       <Title>

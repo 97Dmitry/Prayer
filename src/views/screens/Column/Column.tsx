@@ -6,6 +6,7 @@ import NavButton from "../../components/UI/NavButton/NavButton";
 import { Subs } from "../Subs";
 import { Prayers } from "../Prayers";
 import { renderTabBar } from "../../components/UI/RendeTabBar";
+import Logo from "../../../assets/icons/user.svg";
 
 interface IColumn {
   route?: any;
@@ -17,8 +18,9 @@ const Column: FC<IColumn> = ({ route, navigation }) => {
     navigation.setOptions({
       headerTitle: route.params.title,
       headerStyle: {
-        borderBottomWidth: 0,
+        shadowColor: "#fff",
       },
+
       headerRight: () => (
         <NavButton
           onPressFunc={() => console.log("Tab")}
@@ -43,12 +45,14 @@ const Column: FC<IColumn> = ({ route, navigation }) => {
   const renderScene = SceneMap({ myPrayers: Prayers, subscribed: Subs });
 
   return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      renderTabBar={renderTabBar}
-    />
+    <>
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        renderTabBar={renderTabBar}
+      />
+    </>
   );
 };
 

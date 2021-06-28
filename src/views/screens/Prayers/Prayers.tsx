@@ -8,6 +8,9 @@ const Prayers: FC = () => {
     <Wrapper>
       <Text>Prayers</Text>
       <Card cardName={"Card"} />
+      <Card cardName={"Card"} />
+      <Card cardName={"Card"} />
+      <Card cardName={"Card"} />
     </Wrapper>
   );
 };
