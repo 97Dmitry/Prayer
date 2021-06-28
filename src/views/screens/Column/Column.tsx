@@ -2,11 +2,10 @@ import React, { FC, useLayoutEffect } from "react";
 import { Icon } from "react-native-elements";
 import { SceneMap, TabView } from "react-native-tab-view";
 
-import NavButton from "../../components/UI/NavButton/NavButton";
+import { NavButton } from "../../components/UI/NavButton";
 import { Subs } from "../Subs";
 import { Prayers } from "../Prayers";
 import { renderTabBar } from "../../components/UI/RendeTabBar";
-import Logo from "../../../assets/icons/user.svg";
 
 interface IColumn {
   route?: any;
@@ -51,6 +50,7 @@ const Column: FC<IColumn> = ({ route, navigation }) => {
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderTabBar={renderTabBar}
+        swipeEnabled={false}
       />
     </>
   );

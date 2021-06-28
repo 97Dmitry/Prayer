@@ -10,7 +10,7 @@ interface ICard {
   cardName: string;
 }
 
-const Card: FC<ICard> = ({}) => {
+const Card: FC<ICard> = ({ cardName }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   return (
     <Wrapper>
@@ -22,7 +22,7 @@ const Card: FC<ICard> = ({}) => {
           size={35}
           onPress={() => setToggleCheckBox(!toggleCheckBox)}
         />
-        <Text>Item</Text>
+        <Text>{cardName}</Text>
       </WrapperLeft>
       <Imgs>
         <Prayer width={50} height={40} />
@@ -38,8 +38,8 @@ export default Card;
 
 const Wrapper = styled.View`
   height: 64px;
-  margin-top: 10px;
-  width: 90%;
+  padding: 10px;
+  width: 100%;
 
   align-items: center;
   flex-direction: row;
@@ -70,6 +70,7 @@ const Indicator = styled.View<IIndicator>`
 const Text = styled.Text`
   font-size: 18px;
   align-self: center;
+  max-width: 120px;
 `;
 
 const CountText = styled.Text`

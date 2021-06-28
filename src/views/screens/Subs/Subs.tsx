@@ -1,20 +1,24 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
+import { Card } from "../../components/Card";
 
-interface ilable {}
+interface ISubs {}
 
-const lable: FC<ilable> = ({}) => {
+const Subs: FC<ISubs> = ({}) => {
   return (
     <Wrapper>
       <Text>Subscrubered</Text>
+      <Card cardName={"Card"} />
+      <Card cardName={"Card"} />
     </Wrapper>
   );
 };
 
-export default lable;
+export default Subs;
 
 const Wrapper = styled.View`
   flex: 1;
+  background-color: #fff;
   text-align: center;
   align-items: center;
 `;
