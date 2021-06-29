@@ -2,47 +2,54 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Button } from "react-native";
 
-import { Header } from "../../components/Header";
+import { useAppDispatch } from "../../../store/hooks";
+import { registration } from "../../../store/user/userSlice";
+
 import { Input } from "../../components/UI/Input";
 
 const Registration = () => {
-  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useAppDispatch();
+
+  const registrationHandler = () => {
+    dispatch(registration({ email, name, password }));
+  };
+
   return (
     <>
       <Wrapper>
-        <Header title={"Registration"} />
-      </Wrapper>
-      <Content>
-        <Text>Login</Text>
+        <Text>Email</Text>
         <Input
-          placeholderText={"Input your login"}
-          text={login}
-          setText={setLogin}
+          placeholderText={"Input your email"}
+          text={email}
+          setText={setEmail}
+        />
+        <Text>Name</Text>
+        <Input
+          placeholderText={"Input your email"}
+          text={name}
+          setText={setName}
         />
         <Text>Password</Text>
         <Input
           placeholderText={"Input your password"}
           text={password}
           setText={setPassword}
+          secure={true}
         />
         <ButtonUp>
-          <Button
-            title={"Sing Up"}
-            onPress={() => {
-              console.log("Login: ", login, "Password: ", password);
-            }}
-          />
+          <Button title={"Sing Up"} onPress={registrationHandler} />
         </ButtonUp>
-      </Content>
+      </Wrapper>
     </>
   );
 };
 
 export default Registration;
 
-const Wrapper = styled.View``;
-const Content = styled.ScrollView`
+const Wrapper = styled.View`
   padding: 25px;
   flex: 1;
 `;

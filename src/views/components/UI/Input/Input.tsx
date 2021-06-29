@@ -6,14 +6,22 @@ interface IInput {
   placeholderText: string;
   text: string;
   setText: any;
+  secure?: boolean;
 }
 
-const Input: FC<IInput> = ({ children, placeholderText, text, setText }) => {
+const Input: FC<IInput> = ({
+  children,
+  placeholderText,
+  text,
+  setText,
+  secure = false,
+}) => {
   const [focus, setFocus] = useState(false);
   return (
     <Wrapper border={focus}>
       <Icon>{children}</Icon>
       <InputField
+        secureTextEntry={secure}
         onFocus={() => {
           setFocus(!focus);
         }}
