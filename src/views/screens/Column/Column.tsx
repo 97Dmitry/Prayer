@@ -48,7 +48,7 @@ const Column: FC<IColumn> = ({ route, navigation }) => {
 
   useEffect(() => {
     dispatch(getColumnById({ id: columnId }));
-  }, [dispatch, columnId, column]);
+  }, [dispatch, columnId]);
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([

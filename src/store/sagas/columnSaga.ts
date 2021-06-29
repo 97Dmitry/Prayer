@@ -1,5 +1,10 @@
 import { call, put } from "redux-saga/effects";
-import { setColumns, getAllColumns, setColumn } from "../column/columnSlice";
+import {
+  setColumns,
+  getAllColumns,
+  setColumn,
+  getColumnById,
+} from "../column/columnSlice";
 import {
   createColumn,
   deleteColumn,
@@ -46,6 +51,7 @@ export function* handleUpdateColumn(action) {
       { title: action.payload.title, description: action.payload.description },
       action.payload.id,
     );
+    yield put(getColumnById({ id: action.payload.id }));
     yield put(getAllColumns());
   } catch (error) {
     console.log(error);
