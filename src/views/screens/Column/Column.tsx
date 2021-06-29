@@ -1,6 +1,10 @@
-import React, { FC, useLayoutEffect } from "react";
+import React, { FC, useEffect, useLayoutEffect } from "react";
 import { Icon } from "react-native-elements";
 import { SceneMap, TabView } from "react-native-tab-view";
+
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { selectorColumn } from "../../../store/column/columnSelector";
+import { getColumnById } from "../../../store/column/columnSlice";
 
 import { NavButton } from "../../components/UI/NavButton";
 import { Subs } from "../Subs";
@@ -13,16 +17,22 @@ interface IColumn {
 }
 
 const Column: FC<IColumn> = ({ route, navigation }) => {
+  const dispatch = useAppDispatch();
+  const columnId = route.params.columnId;
+  const column = useAppSelector(selectorColumn);
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: route.params.title,
+      headerTitle: column.title,
       headerStyle: {
         shadowColor: "#fff",
       },
 
       headerRight: () => (
         <NavButton
-          onPressFunc={() => console.log("Tab")}
+          onPressFunc={() =>
+            navigation.navigate("ColumnSettingsModal", { column })
+          }
           icon={
             <Icon
               color={"#72a8bc"}
@@ -34,7 +44,11 @@ const Column: FC<IColumn> = ({ route, navigation }) => {
         />
       ),
     });
-  }, [navigation, route]);
+  }, [column, navigation, route]);
+
+  useEffect(() => {
+    dispatch(getColumnById({ id: columnId }));
+  }, [dispatch, columnId, column]);
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([

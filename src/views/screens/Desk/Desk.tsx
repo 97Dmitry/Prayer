@@ -28,7 +28,7 @@ const Desk: FC<IDesk> = ({ navigation }) => {
       headerTitle: "My Desk",
       headerRight: () => (
         <NavButton
-          onPressFunc={() => console.log("Tab")}
+          onPressFunc={() => navigation.navigate("NewColumnModal")}
           icon={
             <Icon color={"#72a8bc"} name={"add"} type={"material"} size={40} />
           }
@@ -43,6 +43,7 @@ const Desk: FC<IDesk> = ({ navigation }) => {
         {Object.keys(columns).map(id => (
           <ColumnLine
             key={columns[id].id}
+            columnId={columns[id].id}
             title={columns[id].title}
             navigation={navigation}
           />
@@ -54,7 +55,7 @@ const Desk: FC<IDesk> = ({ navigation }) => {
 
 export default Desk;
 
-const Wrapper = styled.View`
+const Wrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
 `;

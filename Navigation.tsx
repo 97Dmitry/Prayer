@@ -12,8 +12,8 @@ import { Registration } from "./src/views/screens/Registration";
 import { Desk } from "./src/views/screens/Desk";
 import { Column } from "./src/views/screens/Column";
 import { Nav } from "./src/views/components/Nav";
-
-const Stack = createStackNavigator();
+import { NewColumnModal } from "./src/views/components/NewColumnModal";
+import { ColumnSettingsModal } from "./src/views/components/ColumnSettingsModal";
 
 const Navigation = () => {
   const token = useAppSelector(selectorUserToken);
@@ -23,9 +23,11 @@ const Navigation = () => {
     return config;
   });
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
+  const RootStack = createStackNavigator();
+  const MainStack = createStackNavigator();
+  function MainStackScreen() {
+    return (
+      <MainStack.Navigator
         screenOptions={{
           headerTitle: props => <Nav {...props} />,
           headerStyle: {
@@ -42,8 +44,8 @@ const Navigation = () => {
         }}>
         {token ? (
           <>
-            <Stack.Screen name="Home" component={Desk} />
-            <Stack.Screen
+            <MainStack.Screen name="Home" component={Desk} />
+            <MainStack.Screen
               name="Column"
               component={Column}
               // @ts-ignore
@@ -52,19 +54,32 @@ const Navigation = () => {
           </>
         ) : (
           <>
-            <Stack.Screen
+            <MainStack.Screen
               name="Auth"
               component={Auth}
               options={{ headerTitle: "Authorization" }}
             />
-            <Stack.Screen
+            <MainStack.Screen
               name="Registration"
               component={Registration}
               options={{ headerTitle: "Registration" }}
             />
           </>
         )}
-      </Stack.Navigator>
+      </MainStack.Navigator>
+    );
+  }
+
+  return (
+    <NavigationContainer>
+      <RootStack.Navigator mode="modal" headerMode="none">
+        <RootStack.Screen name="Main" component={MainStackScreen} />
+        <RootStack.Screen name="NewColumnModal" component={NewColumnModal} />
+        <RootStack.Screen
+          name="ColumnSettingsModal"
+          component={ColumnSettingsModal}
+        />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };

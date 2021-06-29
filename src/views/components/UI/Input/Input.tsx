@@ -7,6 +7,7 @@ interface IInput {
   text: string;
   setText: any;
   secure?: boolean;
+  botMargin?: number;
 }
 
 const Input: FC<IInput> = ({
@@ -15,10 +16,11 @@ const Input: FC<IInput> = ({
   text,
   setText,
   secure = false,
+  botMargin = 0,
 }) => {
   const [focus, setFocus] = useState(false);
   return (
-    <Wrapper border={focus}>
+    <Wrapper border={focus} botMargin={botMargin}>
       <Icon>{children}</Icon>
       <InputField
         secureTextEntry={secure}
@@ -40,6 +42,7 @@ export default Input;
 
 interface IWrapper {
   border: boolean;
+  botMargin?: number;
 }
 const Wrapper = styled.View<IWrapper>`
   display: flex;
@@ -49,6 +52,7 @@ const Wrapper = styled.View<IWrapper>`
   border-radius: 10px;
   border: ${props =>
     props.border ? "2px solid #8CE0F7" : "1px solid #e5e5e5"};
+  margin-bottom: ${props => props.botMargin + "px" || 0};
 `;
 
 const InputField = styled.TextInput`
