@@ -11,6 +11,7 @@ import {
   fetchAllColumns,
   fetchColumnById,
   updateColumn,
+  createPrayerForColumn,
 } from "../../api/columnApi";
 
 export function* handleGetColumns() {
@@ -62,6 +63,21 @@ export function* handleDeleteColumn(action) {
   try {
     yield call(deleteColumn, action.payload.id);
     yield put(getAllColumns());
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* handleCreateNewPrayer(action) {
+  try {
+    yield call(
+      createPrayerForColumn,
+      {
+        title: action.payload.title,
+        description: action.payload.description,
+      },
+      action.payload.id,
+    );
   } catch (error) {
     console.log(error);
   }
