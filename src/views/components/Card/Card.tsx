@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import { StyleSheet } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import styled from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 
 import Prayer from "../../../assets/icons/pray.svg";
 import User from "../../../assets/icons/user.svg";
@@ -11,9 +12,14 @@ interface ICard {
 }
 
 const Card: FC<ICard> = ({ cardName }) => {
+  const navigation = useNavigation();
+
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   return (
-    <Wrapper>
+    <Wrapper
+      onPress={() => {
+        navigation.navigate("InsideCard", { cardName });
+      }}>
       <WrapperLeft>
         <Indicator />
         <BouncyCheckbox
@@ -36,9 +42,9 @@ const Card: FC<ICard> = ({ cardName }) => {
 
 export default Card;
 
-const Wrapper = styled.View`
+const Wrapper = styled.Pressable`
   height: 64px;
-  padding: 10px;
+  padding: 0 10px;
   width: 100%;
 
   align-items: center;
