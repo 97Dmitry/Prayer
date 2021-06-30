@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect } from "react";
+import React, { FC, useEffect, useLayoutEffect } from "react";
 import styled from "styled-components/native";
 
 import { ColumnLine } from "../../components/ColumnLine";
@@ -6,19 +6,29 @@ import { Icon } from "react-native-elements";
 
 import NavButton from "../../components/UI/NavButton/NavButton";
 
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { getAllColumns } from "../../../store/column/columnSlice";
+import { selectorColumns } from "../../../store/column/columnSelector";
+
 interface IDesk {
   navigation: any;
 }
 
 const Desk: FC<IDesk> = ({ navigation }) => {
-  const columns = ["To Do", "In Progress", "Completed"];
+  // const columns = ["To Do", "In Progress", "Completed"];
+  const dispatch = useAppDispatch();
+  const columns = useAppSelector(selectorColumns);
+
+  useEffect(() => {
+    dispatch(getAllColumns());
+  }, [dispatch]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: "My Desk",
       headerRight: () => (
         <NavButton
-          onPressFunc={() => console.log("Tab")}
+          onPressFunc={() => navigation.navigate("NewColumnModal")}
           icon={
             <Icon color={"#72a8bc"} name={"add"} type={"material"} size={40} />
           }
@@ -30,8 +40,13 @@ const Desk: FC<IDesk> = ({ navigation }) => {
   return (
     <Wrapper>
       <Columns>
-        {columns.map((value, index) => (
-          <ColumnLine key={index} title={value} navigation={navigation} />
+        {Object.keys(columns).map(id => (
+          <ColumnLine
+            key={columns[id].id}
+            columnId={columns[id].id}
+            title={columns[id].title}
+            navigation={navigation}
+          />
         ))}
       </Columns>
     </Wrapper>
@@ -40,7 +55,7 @@ const Desk: FC<IDesk> = ({ navigation }) => {
 
 export default Desk;
 
-const Wrapper = styled.View`
+const Wrapper = styled.ScrollView`
   flex: 1;
   background-color: #ffffff;
 `;

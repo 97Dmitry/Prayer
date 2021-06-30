@@ -1,12 +1,15 @@
-import React, { FC, useLayoutEffect } from "react";
+import React, { FC, useEffect, useLayoutEffect } from "react";
 import { Icon } from "react-native-elements";
 import { SceneMap, TabView } from "react-native-tab-view";
 
-import NavButton from "../../components/UI/NavButton/NavButton";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { selectorColumn } from "../../../store/column/columnSelector";
+import { getColumnById } from "../../../store/column/columnSlice";
+
+import { NavButton } from "../../components/UI/NavButton";
 import { Subs } from "../Subs";
 import { Prayers } from "../Prayers";
 import { renderTabBar } from "../../components/UI/RendeTabBar";
-import Logo from "../../../assets/icons/user.svg";
 
 interface IColumn {
   route?: any;
@@ -14,16 +17,22 @@ interface IColumn {
 }
 
 const Column: FC<IColumn> = ({ route, navigation }) => {
+  const dispatch = useAppDispatch();
+  const columnId = route.params.columnId;
+  const column = useAppSelector(selectorColumn);
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: route.params.title,
+      headerTitle: column.title,
       headerStyle: {
         shadowColor: "#fff",
       },
 
       headerRight: () => (
         <NavButton
-          onPressFunc={() => console.log("Tab")}
+          onPressFunc={() =>
+            navigation.navigate("ColumnSettingsModal", { column })
+          }
           icon={
             <Icon
               color={"#72a8bc"}
@@ -35,7 +44,11 @@ const Column: FC<IColumn> = ({ route, navigation }) => {
         />
       ),
     });
-  }, [navigation, route]);
+  }, [column, navigation, route]);
+
+  useEffect(() => {
+    dispatch(getColumnById({ id: columnId }));
+  }, [dispatch, columnId]);
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -51,6 +64,7 @@ const Column: FC<IColumn> = ({ route, navigation }) => {
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderTabBar={renderTabBar}
+        swipeEnabled={false}
       />
     </>
   );

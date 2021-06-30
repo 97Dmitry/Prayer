@@ -2,11 +2,11 @@ import "react-native-gesture-handler";
 import React, { FC } from "react";
 import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { LogBox } from "react-native";
 
 import store from "./src/store";
 import Navigation from "./Navigation";
 
+import { LogBox } from "react-native";
 LogBox.ignoreLogs(["Reanimated 2"]);
 
 const App: FC = () => {
