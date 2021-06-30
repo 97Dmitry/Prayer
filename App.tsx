@@ -3,7 +3,8 @@ import React, { FC } from "react";
 import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import store from "./src/store";
+import store, { persistor } from "./src/store";
+import { PersistGate } from "redux-persist/integration/react";
 import Navigation from "./Navigation";
 
 import { LogBox } from "react-native";
@@ -13,7 +14,9 @@ const App: FC = () => {
   return (
     <SafeAreaProvider>
       <Provider store={store}>
-        <Navigation />
+        <PersistGate loading={null} persistor={persistor}>
+          <Navigation />
+        </PersistGate>
       </Provider>
     </SafeAreaProvider>
   );
