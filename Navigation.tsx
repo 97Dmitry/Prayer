@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useAppSelector } from "./src/store/hooks";
 import { selectorUserToken } from "./src/store/user/userSelector";
@@ -18,6 +19,19 @@ import { InsideCard } from "./src/views/screens/InsideCard";
 
 const Navigation = () => {
   const token = useAppSelector(selectorUserToken);
+  const storageToken = async () => {
+    try {
+      const value = await AsyncStorage.getItem("persist:root");
+      if (value) {
+        const parsValue = JSON.parse(value);
+        const userState = JSON.parse(parsValue.userState);
+        return userState.token;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  storageToken().then();
 
   httpClient.interceptors.request.use(function (config) {
     token ? (config.headers.Authorization = `Bearer ${token}`) : null;
