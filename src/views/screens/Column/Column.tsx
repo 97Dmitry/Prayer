@@ -9,7 +9,7 @@ import { getColumnById } from "../../../store/column/columnSlice";
 import { NavButton } from "../../components/UI/NavButton";
 import { Subs } from "../Subs";
 import { Prayers } from "../Prayers";
-import { renderTabBar } from "../../components/UI/RendeTabBar";
+import { renderTabBar } from "../../components/UI/RenderTabBar";
 
 interface IColumn {
   route?: any;

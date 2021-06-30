@@ -8,7 +8,6 @@ interface IColumn {
 }
 
 const ColumnLine: FC<IColumn> = ({ title, navigation, columnId }) => {
-  console.log(columnId);
   return (
     <Wrapper
       onPress={() => {

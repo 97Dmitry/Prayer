@@ -14,6 +14,7 @@ import { Column } from "./src/views/screens/Column";
 import { Nav } from "./src/views/components/Nav";
 import { NewColumnModal } from "./src/views/components/NewColumnModal";
 import { ColumnSettingsModal } from "./src/views/components/ColumnSettingsModal";
+import { InsideCard } from "./src/views/screens/InsideCard";
 
 const Navigation = () => {
   const token = useAppSelector(selectorUserToken);
@@ -50,6 +51,11 @@ const Navigation = () => {
               component={Column}
               // @ts-ignore
               options={({ route }) => ({ title: route.params?.title })}
+            />
+            <MainStack.Screen
+              name="InsideCard"
+              component={InsideCard}
+              options={{ headerTitle: "" }}
             />
           </>
         ) : (

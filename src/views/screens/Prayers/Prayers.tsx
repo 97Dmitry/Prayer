@@ -1,8 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components/native";
 import { SwipeListView } from "react-native-swipe-list-view";
 
 import { Card } from "../../components/Card";
+import { Input } from "../../components/UI/Input";
+import { Icon } from "react-native-elements";
 
 const Prayers: FC = () => {
   const cards = [
@@ -12,16 +14,26 @@ const Prayers: FC = () => {
     { key: 4, text: "Card4" },
   ];
 
-  const ri = data => {
+  const rI = data => {
     return <Card cardName={data.item.text} />;
   };
 
+  const [newPray, setNewPray] = useState("");
+
   return (
     <Wrapper>
-      <Text>Prayers</Text>
+      <Input
+        text={newPray}
+        setText={setNewPray}
+        placeholderText={"Add a prayer..."}
+        botMargin={15}
+        children={
+          <Icon color={"#72a8bc"} name={"add"} type={"material"} size={40} />
+        }
+      />
       <SwipeListView
         data={cards}
-        renderItem={ri}
+        renderItem={rI}
         renderHiddenItem={() => (
           <Button
             onPress={() => {
@@ -40,6 +52,7 @@ export default Prayers;
 
 const Wrapper = styled.View`
   background-color: #ffffff;
+  padding: 15px 15px;
 `;
 
 const Text = styled.Text`
