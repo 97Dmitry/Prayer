@@ -19,3 +19,9 @@ export interface IState {
   columns: Record<number, IColumn>;
   currentColumn: IColumn;
 }
+
+export interface IPrayer {
+  title: string;
+  description: string;
+  id: number;
+}

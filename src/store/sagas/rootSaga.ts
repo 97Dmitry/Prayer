@@ -5,6 +5,7 @@ import {
   handleGetColumnById,
   handleGetColumns,
   handleUpdateColumn,
+  handleCreateNewPrayer,
 } from "./columnSaga";
 import {
   createNewColumn,
@@ -12,6 +13,7 @@ import {
   getColumnById,
   updateColumn,
   deleteColumn,
+  createNewPreyer,
 } from "../column/columnSlice";
 import { authorization, registration } from "../user/userSlice";
 import { handleSingIn, handleSingUp } from "./userSaga";
@@ -24,4 +26,5 @@ export function* watcherSaga() {
   yield takeEvery(getColumnById.type, handleGetColumnById);
   yield takeEvery(updateColumn.type, handleUpdateColumn);
   yield takeEvery(deleteColumn.type, handleDeleteColumn);
+  yield takeEvery(createNewPreyer.type, handleCreateNewPrayer);
 }

@@ -32,9 +32,9 @@ const Card: FC<ICard> = ({ cardName }) => {
       </WrapperLeft>
       <Imgs>
         <Prayer width={50} height={40} />
-        <CountText>10</CountText>
+        <CountText>{Math.floor(Math.random() * 100)}</CountText>
         <User width={50} height={40} />
-        <CountText>130</CountText>
+        <CountText>{Math.floor(Math.random() * 100)}</CountText>
       </Imgs>
     </Wrapper>
   );

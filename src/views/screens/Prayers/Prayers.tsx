@@ -2,11 +2,19 @@ import React, { FC, useState } from "react";
 import styled from "styled-components/native";
 import { SwipeListView } from "react-native-swipe-list-view";
 
+import { useAppDispatch } from "../../../store/hooks";
+import { createNewPreyer } from "../../../store/column/columnSlice";
+
 import { Card } from "../../components/Card";
 import { Input } from "../../components/UI/Input";
 import { Icon } from "react-native-elements";
 
-const Prayers: FC = () => {
+interface IPrayers {
+  columnId: number;
+}
+const Prayers: FC<IPrayers> = ({ columnId }) => {
+  const dispatch = useAppDispatch();
+
   const cards = [
     { key: 1, text: "Card1" },
     { key: 2, text: "Card2" },
@@ -19,6 +27,14 @@ const Prayers: FC = () => {
   };
 
   const [newPray, setNewPray] = useState("");
+  const newPrayerHandler = () => {
+    if (newPray.length) {
+      dispatch(
+        createNewPreyer({ description: "", title: newPray, id: columnId }),
+      );
+      setNewPray("");
+    }
+  };
 
   return (
     <Wrapper>
@@ -28,7 +44,13 @@ const Prayers: FC = () => {
         placeholderText={"Add a prayer..."}
         botMargin={15}
         children={
-          <Icon color={"#72a8bc"} name={"add"} type={"material"} size={40} />
+          <Icon
+            color={"#72a8bc"}
+            name={"add"}
+            type={"material"}
+            size={40}
+            onPress={newPrayerHandler}
+          />
         }
       />
       <SwipeListView
@@ -53,11 +75,6 @@ export default Prayers;
 const Wrapper = styled.View`
   background-color: #ffffff;
   padding: 15px 15px;
-`;
-
-const Text = styled.Text`
-  text-align: center;
-  font-size: 25px;
 `;
 
 const Button = styled.Pressable`

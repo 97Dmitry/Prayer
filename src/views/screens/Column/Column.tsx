@@ -55,7 +55,10 @@ const Column: FC<IColumn> = ({ route, navigation }) => {
     { key: "myPrayers", title: "My prayers" },
     { key: "subscribed", title: "Subscribed" },
   ]);
-  const renderScene = SceneMap({ myPrayers: Prayers, subscribed: Subs });
+  const renderScene = SceneMap({
+    myPrayers: () => <Prayers columnId={columnId} />,
+    subscribed: Subs,
+  });
 
   return (
     <>

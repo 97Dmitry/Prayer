@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IColumn, INewColumn, IState, IUpdateColumn } from "./iColumn";
+import { IColumn, INewColumn, IState, IUpdateColumn, IPrayer } from "./iColumn";
 
 const initialState: IState = {
   columns: {},
@@ -28,6 +28,8 @@ export const columnSlice = createSlice({
     updateColumn: (state, action: PayloadAction<IUpdateColumn>) => {},
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     deleteColumn: (state, action: PayloadAction<{ id: number }>) => {},
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    createNewPreyer: (state, action: PayloadAction<IPrayer>) => {},
   },
 });
 
@@ -40,4 +42,5 @@ export const {
   setColumn,
   updateColumn,
   deleteColumn,
+  createNewPreyer,
 } = columnSlice.actions;
