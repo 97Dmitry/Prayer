@@ -1,4 +1,5 @@
 import { call, put } from "redux-saga/effects";
+import { PayloadAction } from "@reduxjs/toolkit";
 import {
   setColumns,
   getAllColumns,
@@ -24,7 +25,9 @@ export function* handleGetColumns() {
   }
 }
 
-export function* handleCreateColumn(action) {
+export function* handleCreateColumn(
+  action: PayloadAction<{ title: string; description: string }>,
+) {
   try {
     yield call(createColumn, {
       title: action.payload.title,
@@ -37,7 +40,7 @@ export function* handleCreateColumn(action) {
   }
 }
 
-export function* handleGetColumnById(action) {
+export function* handleGetColumnById(action: PayloadAction<{ id: number }>) {
   try {
     const response = yield call(fetchColumnById, action.payload.id);
     yield put(setColumn({ ...response.data }));
@@ -46,7 +49,9 @@ export function* handleGetColumnById(action) {
   }
 }
 
-export function* handleUpdateColumn(action) {
+export function* handleUpdateColumn(
+  action: PayloadAction<{ title: string; description: string; id: number }>,
+) {
   try {
     yield call(
       updateColumn,
@@ -60,7 +65,7 @@ export function* handleUpdateColumn(action) {
   }
 }
 
-export function* handleDeleteColumn(action) {
+export function* handleDeleteColumn(action: PayloadAction<{ id: number }>) {
   try {
     yield call(deleteColumn, action.payload.id);
     yield put(getAllColumns());
@@ -69,7 +74,9 @@ export function* handleDeleteColumn(action) {
   }
 }
 
-export function* handleCreateNewPrayer(action) {
+export function* handleCreateNewPrayer(
+  action: PayloadAction<{ title: string; description: string; id: number }>,
+) {
   try {
     yield call(
       createPrayerForColumn,

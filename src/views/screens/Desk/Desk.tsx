@@ -45,7 +45,6 @@ const Desk: FC<IDesk> = ({ navigation }) => {
             key={columns[id].id}
             columnId={columns[id].id}
             title={columns[id].title}
-            navigation={navigation}
           />
         ))}
       </Columns>

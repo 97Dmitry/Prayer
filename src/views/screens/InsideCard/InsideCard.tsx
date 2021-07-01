@@ -1,13 +1,15 @@
 import React, { FC, useLayoutEffect, useState } from "react";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
+import { Icon } from "react-native-elements";
 
-import { NavButton } from "../../components/UI/NavButton";
+import { useAppDispatch } from "../../../store/hooks";
 
 import Prayer from "../../../assets/icons/pray-white.svg";
 import User from "../../../assets/icons/user-img.svg";
+import { NavButton } from "../../components/UI/NavButton";
 import { Comments } from "../../components/Comments";
-import { Icon } from "react-native-elements";
+import { createCommentForPrayer } from "../../../store/prayer/prayerSlice";
 
 interface IInsideCard {
   route: any;
@@ -15,6 +17,7 @@ interface IInsideCard {
 
 const InsideCard: FC<IInsideCard> = ({ route }) => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -32,6 +35,14 @@ const InsideCard: FC<IInsideCard> = ({ route }) => {
     });
   }, [navigation]);
 
+  const addCommentHandler = () => {
+    if (comment.length) {
+      dispatch(
+        createCommentForPrayer({ data: comment, id: route.params.prayerId }),
+      );
+      setComment("");
+    }
+  };
   const [comment, setComment] = useState("");
 
   return (
@@ -101,6 +112,7 @@ const InsideCard: FC<IInsideCard> = ({ route }) => {
             placeholder={"Write something..."}
             value={comment}
             onChangeText={setComment}
+            onSubmitEditing={addCommentHandler}
           />
         </CommentWriteWrapper>
       </Wrapper>
