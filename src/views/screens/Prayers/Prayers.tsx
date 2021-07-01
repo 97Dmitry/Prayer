@@ -1,13 +1,16 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { SwipeListView } from "react-native-swipe-list-view";
 
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { createNewPreyer } from "../../../store/column/columnSlice";
+import { deletePrayer, getAllPrayers } from "../../../store/prayer/prayerSlice";
+import { selectorPrayers } from "../../../store/prayer/prayerSelector";
 
 import { Card } from "../../components/Card";
 import { Input } from "../../components/UI/Input";
 import { Icon } from "react-native-elements";
+import { Text } from "react-native";
 
 interface IPrayers {
   columnId: number;
@@ -15,15 +18,27 @@ interface IPrayers {
 const Prayers: FC<IPrayers> = ({ columnId }) => {
   const dispatch = useAppDispatch();
 
-  const cards = [
-    { key: 1, text: "Card1" },
-    { key: 2, text: "Card2" },
-    { key: 3, text: "Card3dddddddddddddddd" },
-    { key: 4, text: "Card4" },
-  ];
+  useEffect(() => {
+    dispatch(getAllPrayers());
+  }, [dispatch]);
+  //
+  const allCards = useAppSelector(selectorPrayers);
+
+  const cards = Object.keys(allCards)
+    .filter(id => allCards[id].columnId === columnId)
+    .map(id => {
+      return {
+        key: allCards[id].id,
+        card: allCards[id],
+      };
+    });
 
   const rI = data => {
-    return <Card cardName={data.item.text} />;
+    if (data.item.card) {
+      return <Card card={{ ...data.item.card }} />;
+    } else {
+      return <Text>{data.item.text}</Text>;
+    }
   };
 
   const [newPray, setNewPray] = useState("");
@@ -53,19 +68,21 @@ const Prayers: FC<IPrayers> = ({ columnId }) => {
           />
         }
       />
-      <SwipeListView
-        data={cards}
-        renderItem={rI}
-        renderHiddenItem={() => (
-          <Button
-            onPress={() => {
-              console.log("Delete");
-            }}>
-            <ButtonTitle>Delete</ButtonTitle>
-          </Button>
-        )}
-        rightOpenValue={-75}
-      />
+      {cards ? (
+        <SwipeListView
+          data={cards}
+          renderItem={rI}
+          renderHiddenItem={data => (
+            <Button
+              onPress={() => {
+                dispatch(deletePrayer({ id: data.item?.card.id }));
+              }}>
+              <ButtonTitle>Delete</ButtonTitle>
+            </Button>
+          )}
+          rightOpenValue={-75}
+        />
+      ) : null}
     </Wrapper>
   );
 };
@@ -73,6 +90,7 @@ const Prayers: FC<IPrayers> = ({ columnId }) => {
 export default Prayers;
 
 const Wrapper = styled.View`
+  flex: 1;
   background-color: #ffffff;
   padding: 15px 15px;
 `;

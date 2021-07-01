@@ -19,8 +19,12 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<IUser>) => {
       return { ...state, ...action.payload };
     },
+    removeUser: () => {
+      return { ...initialState };
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { authorization, setUser, registration } = userSlice.actions;
+export const { authorization, setUser, registration, removeUser } =
+  userSlice.actions;

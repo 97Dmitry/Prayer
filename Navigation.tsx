@@ -3,7 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { useAppSelector } from "./src/store/hooks";
+import { useAppSelector, useAppDispatch } from "./src/store/hooks";
+import { removeUser } from "./src/store/user/userSlice";
 import { selectorUserToken } from "./src/store/user/userSelector";
 
 import httpClient from "./src/api/server";
@@ -19,6 +20,7 @@ import { InsideCard } from "./src/views/screens/InsideCard";
 
 const Navigation = () => {
   const token = useAppSelector(selectorUserToken);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const storageToken = async () => {
     try {
       const value = await AsyncStorage.getItem("persist:root");
@@ -31,12 +33,28 @@ const Navigation = () => {
       console.log(e);
     }
   };
-  storageToken().then();
 
   httpClient.interceptors.request.use(function (config) {
     token ? (config.headers.Authorization = `Bearer ${token}`) : null;
     return config;
   });
+
+  const dispatch = useAppDispatch();
+
+  httpClient.interceptors.response.use(
+    response => {
+      return response;
+    },
+    async error => {
+      // У пользователя статический токен 401 быть не может, но и 403 быть не должно
+      // На всякий случай
+      if (error.message === "Request failed with status code 403") {
+        await AsyncStorage.clear();
+        dispatch(removeUser());
+      }
+      return Promise.reject(error);
+    },
+  );
 
   const RootStack = createStackNavigator();
   const MainStack = createStackNavigator();

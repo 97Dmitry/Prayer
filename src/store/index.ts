@@ -21,6 +21,7 @@ import createSagaMiddleware from "@redux-saga/core";
 
 import columnSlice from "./column/columnSlice";
 import authSlice from "./user/userSlice";
+import prayerSlice from "./prayer/prayerSlice";
 import { watcherSaga } from "./sagas/rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -28,6 +29,7 @@ const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
   columnState: columnSlice,
   userState: authSlice,
+  prayerState: prayerSlice,
 });
 
 const persistConfig = {
