@@ -3,8 +3,12 @@ import { IColumn, INewColumn, IState, IUpdateColumn, IPrayer } from "./iColumn";
 
 const initialState: IState = {
   columns: {},
-  // @ts-ignore
-  currentColumn: {},
+  currentColumn: {
+    description: "",
+    id: 0,
+    title: "",
+    userId: 0,
+  },
 };
 
 export const columnSlice = createSlice({
@@ -13,14 +17,12 @@ export const columnSlice = createSlice({
   reducers: {
     getAllColumns: () => {},
     setColumns: (state, action: PayloadAction<Record<number, IColumn>>) => {
-      const columns = action.payload;
-      state.columns = columns;
+      state.columns = action.payload;
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getColumnById: (state, action: PayloadAction<{ id: number }>) => {},
     setColumn: (state, action: PayloadAction<IColumn>) => {
       state.currentColumn = action.payload;
-      console.log(action.payload);
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     createNewColumn: (state, action: PayloadAction<INewColumn>) => {},

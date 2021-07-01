@@ -8,17 +8,24 @@ import Prayer from "../../../assets/icons/pray.svg";
 import User from "../../../assets/icons/user.svg";
 
 interface ICard {
-  cardName: string;
+  card: {
+    checked: boolean;
+    columnId: number;
+    commentsIds: number[];
+    description: string;
+    id: number;
+    title: string;
+  };
 }
 
-const Card: FC<ICard> = ({ cardName }) => {
+const Card: FC<ICard> = ({ card }) => {
   const navigation = useNavigation();
 
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  return (
+  return card ? (
     <Wrapper
       onPress={() => {
-        navigation.navigate("InsideCard", { cardName });
+        navigation.navigate("InsideCard", { cardName: card.title });
       }}>
       <WrapperLeft>
         <Indicator />
@@ -28,7 +35,7 @@ const Card: FC<ICard> = ({ cardName }) => {
           size={35}
           onPress={() => setToggleCheckBox(!toggleCheckBox)}
         />
-        <Text>{cardName}</Text>
+        <Text>{card.title}</Text>
       </WrapperLeft>
       <Imgs>
         <Prayer width={50} height={40} />
@@ -37,7 +44,7 @@ const Card: FC<ICard> = ({ cardName }) => {
         <CountText>{Math.floor(Math.random() * 100)}</CountText>
       </Imgs>
     </Wrapper>
-  );
+  ) : null;
 };
 
 export default Card;

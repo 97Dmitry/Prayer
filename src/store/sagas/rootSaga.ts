@@ -1,4 +1,5 @@
 import { takeEvery } from "redux-saga/effects";
+
 import {
   handleCreateColumn,
   handleDeleteColumn,
@@ -15,16 +16,24 @@ import {
   deleteColumn,
   createNewPreyer,
 } from "../column/columnSlice";
+
 import { authorization, registration } from "../user/userSlice";
 import { handleSingIn, handleSingUp } from "./userSaga";
 
+import { deletePrayer, getAllPrayers } from "../prayer/prayerSlice";
+import { handleDeletePrayer, handleGetPrayers } from "./prayerSaga";
+
 export function* watcherSaga() {
-  yield takeEvery(getAllColumns.type, handleGetColumns);
-  yield takeEvery(authorization.type, handleSingIn);
   yield takeEvery(registration.type, handleSingUp);
+  yield takeEvery(authorization.type, handleSingIn);
+
+  yield takeEvery(getAllColumns.type, handleGetColumns);
   yield takeEvery(createNewColumn.type, handleCreateColumn);
   yield takeEvery(getColumnById.type, handleGetColumnById);
   yield takeEvery(updateColumn.type, handleUpdateColumn);
   yield takeEvery(deleteColumn.type, handleDeleteColumn);
   yield takeEvery(createNewPreyer.type, handleCreateNewPrayer);
+
+  yield takeEvery(deletePrayer.type, handleDeletePrayer);
+  yield takeEvery(getAllPrayers.type, handleGetPrayers);
 }

@@ -13,6 +13,7 @@ import {
   updateColumn,
   createPrayerForColumn,
 } from "../../api/columnApi";
+import { getAllPrayers } from "../prayer/prayerSlice";
 
 export function* handleGetColumns() {
   try {
@@ -78,6 +79,7 @@ export function* handleCreateNewPrayer(action) {
       },
       action.payload.id,
     );
+    yield put(getAllPrayers());
   } catch (error) {
     console.log(error);
   }

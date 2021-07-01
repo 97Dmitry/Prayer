@@ -7,3 +7,7 @@ export const fetchAllPrayers = async () => {
 export const fetchPrayerById = async (id: number) => {
   return await httpClient.get(`prayers/${id}`);
 };
+
+export const deletePrayer = async (id: number) => {
+  return await httpClient.delete(`prayers/${id}`);
+};

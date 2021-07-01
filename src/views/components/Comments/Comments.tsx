@@ -28,7 +28,6 @@ const Wrapper = styled.View`
 
   border-color: #e5e5e5;
   border-top-width: 1px;
-  border-bottom-width: 1px;
 
   padding: 15px 0;
 `;
