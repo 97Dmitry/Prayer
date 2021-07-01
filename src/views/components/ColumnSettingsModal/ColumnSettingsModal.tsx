@@ -1,10 +1,11 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components/native";
-import { Input } from "../UI/Input";
+import { Icon } from "react-native-elements";
 
 import { useAppDispatch } from "../../../store/hooks";
 import { deleteColumn, updateColumn } from "../../../store/column/columnSlice";
-import { Icon } from "react-native-elements";
+
+import { Input } from "../UI/Input";
 
 interface IColumnSettingsModal {
   route: any;

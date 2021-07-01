@@ -20,8 +20,16 @@ import {
 import { authorization, registration } from "../user/userSlice";
 import { handleSingIn, handleSingUp } from "./userSaga";
 
-import { deletePrayer, getAllPrayers } from "../prayer/prayerSlice";
-import { handleDeletePrayer, handleGetPrayers } from "./prayerSaga";
+import {
+  createCommentForPrayer,
+  deletePrayer,
+  getAllPrayers,
+} from "../prayer/prayerSlice";
+import {
+  handleCreateCommentForPrayer,
+  handleDeletePrayer,
+  handleGetPrayers,
+} from "./prayerSaga";
 
 export function* watcherSaga() {
   yield takeEvery(registration.type, handleSingUp);
@@ -36,4 +44,5 @@ export function* watcherSaga() {
 
   yield takeEvery(deletePrayer.type, handleDeletePrayer);
   yield takeEvery(getAllPrayers.type, handleGetPrayers);
+  yield takeEvery(createCommentForPrayer.type, handleCreateCommentForPrayer);
 }

@@ -11,3 +11,7 @@ export const fetchPrayerById = async (id: number) => {
 export const deletePrayer = async (id: number) => {
   return await httpClient.delete(`prayers/${id}`);
 };
+
+export const createCommentForPrayer = async (data: string, id: number) => {
+  return await httpClient.post(`prayers/${id}/comments`, { body: data });
+};

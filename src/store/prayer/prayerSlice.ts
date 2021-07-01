@@ -15,8 +15,19 @@ export const prayerSlice = createSlice({
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     deletePrayer: (state, action: PayloadAction<{ id: number }>) => {},
+    createCommentForPrayer: (
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      state,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      action: PayloadAction<{ data: string; id: number }>,
+    ) => {},
   },
 });
 
 export default prayerSlice.reducer;
-export const { deletePrayer, setPrayers, getAllPrayers } = prayerSlice.actions;
+export const {
+  deletePrayer,
+  setPrayers,
+  getAllPrayers,
+  createCommentForPrayer,
+} = prayerSlice.actions;

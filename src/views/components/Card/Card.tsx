@@ -20,12 +20,14 @@ interface ICard {
 
 const Card: FC<ICard> = ({ card }) => {
   const navigation = useNavigation();
-
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   return card ? (
     <Wrapper
       onPress={() => {
-        navigation.navigate("InsideCard", { cardName: card.title });
+        navigation.navigate("InsideCard", {
+          cardName: card.title,
+          prayerId: card.id,
+        });
       }}>
       <WrapperLeft>
         <Indicator />
