@@ -15,7 +15,6 @@ interface IDesk {
 }
 
 const Desk: FC<IDesk> = ({ navigation }) => {
-  // const columns = ["To Do", "In Progress", "Completed"];
   const dispatch = useAppDispatch();
   const columns = useAppSelector(selectorColumns);
 
@@ -45,6 +44,7 @@ const Desk: FC<IDesk> = ({ navigation }) => {
             key={columns[id].id}
             columnId={columns[id].id}
             title={columns[id].title}
+            navigation={navigation}
           />
         ))}
       </Columns>
