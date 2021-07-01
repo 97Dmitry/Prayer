@@ -57,8 +57,8 @@ const Wrapper = styled.View<IWrapper>`
 
 const InputField = styled.TextInput`
   height: 45px;
-  margin: 0 10px;
-  width: 100%;
+  margin: 0 5px;
+  width: 80%;
 `;
 
 const Icon = styled.View`

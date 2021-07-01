@@ -30,14 +30,14 @@ const Card: FC<ICard> = ({ card }) => {
         });
       }}>
       <WrapperLeft>
-        <Indicator />
+        <Indicator color={card.checked ? "green" : "red"} />
         <BouncyCheckbox
           iconStyle={styles.checkBoxForm}
           fillColor={"#1fa055"}
           size={35}
           onPress={() => setToggleCheckBox(!toggleCheckBox)}
         />
-        <Text>{card.title}</Text>
+        <Text numberOfLines={1}>{card.title}</Text>
       </WrapperLeft>
       <Imgs>
         <Prayer width={50} height={40} />
