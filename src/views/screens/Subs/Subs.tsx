@@ -8,8 +8,6 @@ const Subs: FC<ISubs> = ({}) => {
   return (
     <Wrapper>
       <Text>Subscrubered</Text>
-      <Card cardName={"Card"} />
-      <Card cardName={"Card"} />
     </Wrapper>
   );
 };
