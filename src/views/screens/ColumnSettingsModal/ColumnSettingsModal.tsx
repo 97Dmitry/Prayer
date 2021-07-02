@@ -2,14 +2,24 @@ import React, { FC, useState } from "react";
 import styled from "styled-components/native";
 import { Icon } from "react-native-elements";
 
+import { StackNavigationProp } from "@react-navigation/stack";
+import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
+import { MainStackParamList, RootStackParamList } from "../../../../Navigation";
+
 import { useAppDispatch } from "../../../store/hooks";
 import { deleteColumn, updateColumn } from "../../../store/column/columnSlice";
 
-import { Input } from "../UI/Input";
+import { Input } from "../../components/UI/Input";
+
+type ScreenRouteProp = RouteProp<RootStackParamList, "ColumnSettingsModal">;
+type ScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<RootStackParamList, "ColumnSettingsModal">,
+  StackNavigationProp<MainStackParamList, "Home">
+>;
 
 interface IColumnSettingsModal {
-  route: any;
-  navigation: any;
+  route: ScreenRouteProp;
+  navigation: ScreenNavigationProp;
 }
 
 const ColumnSettingsModal: FC<IColumnSettingsModal> = ({

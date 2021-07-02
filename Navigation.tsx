@@ -15,7 +15,7 @@ import { Desk } from "./src/views/screens/Desk";
 import { Column } from "./src/views/screens/Column";
 import { Nav } from "./src/views/components/Nav";
 import { NewColumnModal } from "./src/views/components/NewColumnModal";
-import { ColumnSettingsModal } from "./src/views/components/ColumnSettingsModal";
+import { ColumnSettingsModal } from "./src/views/screens/ColumnSettingsModal";
 import { InsideCard } from "./src/views/screens/InsideCard";
 
 const Navigation = () => {
@@ -46,7 +46,7 @@ const Navigation = () => {
       return response;
     },
     async error => {
-      // У пользователя статический токен 401 быть не может, но и 403 быть не должно
+      // Код ошибки не приходит и 401 быть не может, токент статистический
       // На всякий случай
       if (error.message === "Request failed with status code 403") {
         await AsyncStorage.clear();
@@ -56,7 +56,7 @@ const Navigation = () => {
     },
   );
 
-  const RootStack = createStackNavigator();
+  const RootStack = createStackNavigator<RootStackParamList>();
   const MainStack = createStackNavigator();
   function MainStackScreen() {
     return (
@@ -123,3 +123,19 @@ const Navigation = () => {
 };
 
 export default Navigation;
+
+export type MainStackParamList = {
+  Home: undefined;
+  Column: { title: string; columnId: number };
+  InsideCard: { prayerId: number; cardName: string };
+  Auth: undefined;
+  Registration: undefined;
+};
+
+export type RootStackParamList = {
+  Main: MainStackParamList;
+  ColumnSettingsModal: {
+    column: { title: string; description: string; id: number; userId: number };
+  };
+  NewColumnModal: undefined;
+};

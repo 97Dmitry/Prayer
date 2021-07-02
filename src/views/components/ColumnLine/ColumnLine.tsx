@@ -1,13 +1,20 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
 
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { MainStackParamList } from "../../../../Navigation";
+
+type ScreenNavigationProp = StackNavigationProp<MainStackParamList, "Column">;
+
 interface IColumn {
   title: string;
-  navigation?: any;
   columnId: number;
 }
 
-const ColumnLine: FC<IColumn> = ({ title, navigation, columnId }) => {
+const ColumnLine: FC<IColumn> = ({ title, columnId }) => {
+  const navigation = useNavigation<ScreenNavigationProp>();
+
   return (
     <Wrapper
       onPress={() => {

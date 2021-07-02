@@ -5,14 +5,19 @@ import { Icon } from "react-native-elements";
 
 import { useAppDispatch } from "../../../store/hooks";
 
+import { RouteProp } from "@react-navigation/native";
+import { MainStackParamList } from "../../../../Navigation";
+
 import Prayer from "../../../assets/icons/pray-white.svg";
 import User from "../../../assets/icons/user-img.svg";
 import { NavButton } from "../../components/UI/NavButton";
 import { Comments } from "../../components/Comments";
 import { createCommentForPrayer } from "../../../store/prayer/prayerSlice";
 
+type ScreenRouteProp = RouteProp<MainStackParamList, "InsideCard">;
+
 interface IInsideCard {
-  route: any;
+  route: ScreenRouteProp;
 }
 
 const InsideCard: FC<IInsideCard> = ({ route }) => {
@@ -38,7 +43,10 @@ const InsideCard: FC<IInsideCard> = ({ route }) => {
   const addCommentHandler = () => {
     if (comment.length) {
       dispatch(
-        createCommentForPrayer({ data: comment, id: route.params.prayerId }),
+        createCommentForPrayer({
+          data: comment,
+          id: route.params.prayerId,
+        }),
       );
       setComment("");
     }

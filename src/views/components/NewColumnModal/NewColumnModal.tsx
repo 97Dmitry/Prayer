@@ -5,8 +5,16 @@ import { useAppDispatch } from "../../../store/hooks";
 import { createNewColumn } from "../../../store/column/columnSlice";
 import { Icon } from "react-native-elements";
 
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../../Navigation";
+
+type ScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "NewColumnModal"
+>;
+
 interface INewColumnModal {
-  navigation: any;
+  navigation: ScreenNavigationProp;
 }
 
 const NewColumnModal: FC<INewColumnModal> = ({ navigation }) => {

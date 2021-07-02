@@ -1,17 +1,24 @@
 import React, { FC, useEffect, useLayoutEffect } from "react";
 import styled from "styled-components/native";
-
-import { ColumnLine } from "../../components/ColumnLine";
 import { Icon } from "react-native-elements";
-
-import NavButton from "../../components/UI/NavButton/NavButton";
 
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { getAllColumns } from "../../../store/column/columnSlice";
 import { selectorColumns } from "../../../store/column/columnSelector";
 
+import { ColumnLine } from "../../components/ColumnLine";
+import NavButton from "../../components/UI/NavButton/NavButton";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { MainStackParamList, RootStackParamList } from "../../../../Navigation";
+import { CompositeNavigationProp } from "@react-navigation/native";
+
+type ScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<RootStackParamList, "ColumnSettingsModal">,
+  StackNavigationProp<MainStackParamList, "Home">
+>;
+
 interface IDesk {
-  navigation: any;
+  navigation: ScreenNavigationProp;
 }
 
 const Desk: FC<IDesk> = ({ navigation }) => {
@@ -44,7 +51,6 @@ const Desk: FC<IDesk> = ({ navigation }) => {
             key={columns[id].id}
             columnId={columns[id].id}
             title={columns[id].title}
-            navigation={navigation}
           />
         ))}
       </Columns>

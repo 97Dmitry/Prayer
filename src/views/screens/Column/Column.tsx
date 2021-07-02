@@ -2,6 +2,11 @@ import React, { FC, useEffect, useLayoutEffect } from "react";
 import { Icon } from "react-native-elements";
 import { SceneMap, TabView } from "react-native-tab-view";
 
+import { CompositeNavigationProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
+import { MainStackParamList, RootStackParamList } from "../../../../Navigation";
+
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { selectorColumn } from "../../../store/column/columnSelector";
 import { getColumnById } from "../../../store/column/columnSlice";
@@ -11,9 +16,16 @@ import { Subs } from "../Subs";
 import { Prayers } from "../Prayers";
 import { renderTabBar } from "../../components/UI/RenderTabBar";
 
+type ScreenNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<RootStackParamList, "ColumnSettingsModal">,
+  StackNavigationProp<MainStackParamList, "Column">
+>;
+
+type ScreenRouteProp = RouteProp<MainStackParamList, "Column">;
+
 interface IColumn {
-  route?: any;
-  navigation?: any;
+  route: ScreenRouteProp;
+  navigation: ScreenNavigationProp;
 }
 
 const Column: FC<IColumn> = ({ route, navigation }) => {

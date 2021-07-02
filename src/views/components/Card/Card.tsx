@@ -4,8 +4,16 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 
+import { StackNavigationProp } from "@react-navigation/stack";
+import { MainStackParamList } from "../../../../Navigation";
+
 import Prayer from "../../../assets/icons/pray.svg";
 import User from "../../../assets/icons/user.svg";
+
+type ScreenNavigationProp = StackNavigationProp<
+  MainStackParamList,
+  "InsideCard"
+>;
 
 interface ICard {
   card: {
@@ -19,7 +27,7 @@ interface ICard {
 }
 
 const Card: FC<ICard> = ({ card }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<ScreenNavigationProp>();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   return card ? (
     <Wrapper

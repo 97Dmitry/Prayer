@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import styled from "styled-components/native";
-import { Card } from "../../components/Card";
 
 interface ISubs {}
 
